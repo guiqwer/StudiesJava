@@ -3,7 +3,6 @@ package entities;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Worker {
@@ -14,8 +13,7 @@ public class Worker {
     private Deparment deparment;
     private List<HourContract> contracts = new ArrayList<>();
 
-    public Worker (){
-
+    public Worker() {
     }
 
     public Worker(String name, Deparment deparment, Double salary, WorkerLevel level) {
@@ -61,7 +59,6 @@ public class Worker {
         return contracts;
     }
 
-    //Adicionar na lista o contrato que veio via argumento
     public void addContract(HourContract contract) {
         contracts.add(contract);
     }
@@ -73,15 +70,16 @@ public class Worker {
     public Double income(Integer year, Integer month) {
         double sum = baseSalary;
 
-        for (HourContract c: contracts) {
-            LocalDate contractDate = c.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        for (HourContract c : contracts) {
+            LocalDate contractDate = c.getDate();  // Chame o getDate() agora
             int c_year = contractDate.getYear();
             int c_month = contractDate.getMonthValue();
 
             if (c_year == year && c_month == month) {
-                sum+= c.totalValue();
+                sum += c.totalValue();
             }
         }
+
 
         return sum;
     }
