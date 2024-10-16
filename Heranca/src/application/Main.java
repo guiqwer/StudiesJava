@@ -1,17 +1,44 @@
 package application;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+
+import entities.Account;
+import entities.BusinessAccount;
+import entities.SavingsAccount;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        Account acc = new Account(1001, "ALex Green", 0.0);
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+        BusinessAccount bacc = new BusinessAccount(1002, "Maria", 0.0, 500.00);
+
+        //Upcasting
+
+        Account acc1 = bacc;
+        Account acc2 = new BusinessAccount(1003, "John Smith", 0.0, 500.00);
+        Account acc3 = new SavingsAccount(1004, "Anna", 0.0, 500.00);
+
+        //Downcasting
+        //Superclasse para subclasse
+
+        //Account para bussiness não é possivel, pra isso precisamos fazer o casting
+        BusinessAccount acc4 = (BusinessAccount) acc2;
+        acc4.loan(100.0);
+
+        //Só vai dar problema na hora da execução.
+        //BusinessAccount acc5 = (BusinessAccount) acc3;
+
+        //testar se meu acc3 é um BusinessAccount
+        if(acc3 instanceof BusinessAccount){
+            BusinessAccount acc5 = (BusinessAccount) acc3;
+            acc5.loan(200.0);
+            System.out.println("Loan!");
         }
+
+        if(acc3 instanceof SavingsAccount){
+            SavingsAccount acc5 = (SavingsAccount) acc3;
+            acc5.updateBalance();
+            System.out.println("Update!");
+        }
+
     }
 }

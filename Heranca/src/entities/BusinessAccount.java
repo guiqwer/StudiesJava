@@ -23,7 +23,8 @@ public class BusinessAccount extends Account {
 
     public void loan(double amount) {
         if (amount <= loanLimit) {
-            deposit(amount);
+            //como to fazendo uma operação com meu balance preciso mudar o modificador para protected instead private
+            balance += amount - 10;
         }
     }
 }
