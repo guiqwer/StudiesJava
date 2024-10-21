@@ -69,6 +69,7 @@ public class Main {
                                 enderecoDependente,
                                 grauDependente);
 
+                //adicionar cada dependente na lista
                 contrato.adicionarDependetes(dependente);
 
             }
