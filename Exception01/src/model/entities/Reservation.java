@@ -1,8 +1,11 @@
 package model.entities;
 
+import model.entities.exceptions.DomainException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+
 
 public class Reservation {
     private Integer roomNumber;
@@ -14,7 +17,10 @@ public class Reservation {
     private final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 
-    public Reservation(Integer roomNumber, LocalDate checkIn, LocalDate checkOut) {
+    public Reservation(Integer roomNumber, LocalDate checkIn, LocalDate checkOut)  {
+        if (!checkOut.isAfter(checkIn)) {
+            throw new DomainException("Check-out date must be after check-in date");
+        }
         this.roomNumber = roomNumber;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
@@ -42,20 +48,15 @@ public class Reservation {
         return ChronoUnit.DAYS.between(checkIn, checkOut);
     }
 
-    public void upDates(LocalDate checkIn, LocalDate checkOut) {
+    //apenas jogando a exception quem trata é meu programa principal
+    public void updateDates(LocalDate checkIn, LocalDate checkOut) {
         LocalDate now = LocalDate.now();
-
-        // Verifica se as datas são hoje ou futuras
-        if (checkIn.isAfter(now) || checkOut.isAfter(now)) {
-            throw new IllegalArgumentException("Reservation dates for update must be future dates");
+        if (checkIn.isBefore(now) || checkOut.isBefore(now)) {
+            throw new DomainException("Reservation dates for update must be future dates");
         }
-
-        // Verifica se a data de check-out é depois da data de check-in
         if (!checkOut.isAfter(checkIn)) {
-            throw new IllegalArgumentException("Check-out date must be after check-in date");
+            throw new DomainException("Check-out date must be after check-in date");
         }
-
-        // Atualiza as datas
         this.checkIn = checkIn;
         this.checkOut = checkOut;
     }

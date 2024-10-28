@@ -1,6 +1,7 @@
 package application;
 
 import model.entities.Reservation;
+import model.entities.exceptions.DomainException;
 
 import java.text.ParseException;
 import java.time.DateTimeException;
@@ -11,7 +12,6 @@ import java.util.Scanner;
 public class Program {
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
-
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         try {
@@ -34,16 +34,18 @@ public class Program {
             System.out.print("Check-out date (dd/MM/yyyy): ");
             checkOut = LocalDate.parse(sc.nextLine(), dtf);
 
-            reservation.upDates(checkIn, checkOut);
+            reservation.updateDates(checkIn, checkOut);
             System.out.println("Reservation: " + reservation);
         }
         catch (DateTimeException e){
             System.out.println("Invalid date format");
         }
-        catch (IllegalArgumentException e){
-            System.out.println("Erro in reservation" + e.getMessage());
+        catch (DomainException e){
+            System.out.println("Erro in reservation: " + e.getMessage());
+        }//exceção generica
+        catch (RuntimeException e){
+            System.out.println("Unexpected error");
         }
-
 
         sc.close();
     }
