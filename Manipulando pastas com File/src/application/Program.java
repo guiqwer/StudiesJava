@@ -33,7 +33,7 @@ public class Program {
 
         //criar subpasta
         boolean success = new File(strPath + "\\teste").mkdir();
-        
+
         System.out.println("Directory created successfully: " + success);
         sc.close();
     }
