@@ -4,6 +4,7 @@ public class PaypalService implements OnlinePaymentService {
 
     //taxa de pagamento de 2%
     private static final double FEE_PERCENTAGE = 0.02;
+    //juros por mes de 1%
     private static final double FEE_INTEREST = 0.01;
 
 
