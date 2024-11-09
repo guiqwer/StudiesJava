@@ -37,9 +37,9 @@ public class Invoice {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Fatura: \n");
-        sb.append("Pagamento basico: " + getBasicPayment() + "\n");
-        sb.append("Imposto: " + getTax() + "\n");
-        sb.append("Pagamento total: " + getTotalPayment() + "\n");
+        sb.append("Pagamento basico: ").append(String.format("%.2f", getBasicPayment())).append("\n");
+        sb.append("Imposto: ").append(String.format("%.2f", getTax())).append("\n");
+        sb.append("Pagamento total: ").append(String.format("%.2f", getTotalPayment())).append("\n");
         return sb.toString();
     }
 

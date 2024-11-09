@@ -5,13 +5,13 @@ import mode.entities.Invoice;
 
 import java.time.Duration;
 
-public class RentalService {
+public class RentalService  {
     private Double pricePerDay;
     private Double pricePerHour;
 
-    private BrazilTaxService taxService;
+    private TaxService taxService;
 
-    public RentalService(Double pricePerDay, Double pricePerHour, BrazilTaxService taxService) {
+    public RentalService(Double pricePerDay, Double pricePerHour, TaxService taxService) {
         this.pricePerDay = pricePerDay;
         this.pricePerHour = pricePerHour;
         this.taxService = taxService;
@@ -33,13 +33,6 @@ public class RentalService {
         this.pricePerHour = pricePerHour;
     }
 
-    public BrazilTaxService getTaxService() {
-        return taxService;
-    }
-
-    public void setTaxService(BrazilTaxService taxService) {
-        this.taxService = taxService;
-    }
 
     public void processInvoice(CarRental carRental) {
 
