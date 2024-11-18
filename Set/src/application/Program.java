@@ -7,15 +7,14 @@ import java.util.TreeSet;
 
 public class Program {
     public static void main(String[] args) {
-        Set<String> set = new LinkedHashSet<>();
+        //Set<String> set = new LinkedHashSet<>();
         //Set<String> set = new HashSet<>();
-        //Set<String> set = new TreeSet<>();
-        set.add("TV");
-        set.add("Notebook");
-        set.add("Tablet");
-
-        //usando lambda fiz o predicado
-        set.removeIf(x->x.length() >= 3);
+        Set<String> set = new TreeSet<>();
+        set.add("Lucas Delacroix Alves do Rêgo");
+        set.add("Louise Sampaio Araujo Goncalves");
+        set.add("Guilherme Pereira de Souza");
+        set.add("Antonio Lucas Barbosa Salvador");
+        
 
         System.out.println(set.contains("Notebook"));
 
@@ -23,6 +22,7 @@ public class Program {
             System.out.println(p);
         }
     }
+
 
 
 }
