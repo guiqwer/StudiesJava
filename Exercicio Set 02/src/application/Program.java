@@ -14,7 +14,7 @@ public class Program {
 
         System.out.print("How many students for course A? ");
         int n = sc.nextInt();
-        
+
         Set<Alunos> alunos = new HashSet<>();
         for(int i = 1; i <= n; i++) {
             System.out.print("Code student " + i + ": ");
