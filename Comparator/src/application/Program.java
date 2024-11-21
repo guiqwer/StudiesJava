@@ -17,8 +17,7 @@ public class Program {
         //Função anonima
         //Posso passar toda a operação lambda no meu sort
         //Comparator<Product> comp = (o1, o2) -> o1.getName().toUpperCase().compareTo(o2.getName().toUpperCase());
-
-
+        
         list.sort((p1, p2) -> p1.getName().toUpperCase().compareTo(p2.getName().toUpperCase()));
         list.sort(Comparator.comparing(o -> o.getName().toUpperCase()));
 
