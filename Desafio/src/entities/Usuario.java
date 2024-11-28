@@ -3,6 +3,7 @@ package entities;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Usuario {
@@ -10,6 +11,13 @@ public class Usuario {
     private String email;
     private Integer idade;
     private Double altura;
+
+
+    public static List<Usuario> listaUsuarios = new ArrayList<>();
+
+    public Usuario(){
+
+    }
 
     public Usuario(String nome, String email, Integer idade, Double altura) {
         this.nome = nome;
@@ -50,32 +58,58 @@ public class Usuario {
         this.altura = altura;
     }
 
-    public void escreverEmArquivo(int indice){
-        try (BufferedWriter bw = new BufferedWriter(
-                new FileWriter("C:\\Users\\guilh\\IdeaProjects\\"
-                        + indice
-                        + "-"
-                        + getNome().trim().toUpperCase().replace(" ", "")
-                        + ".txt", true))) {
-            bw.write(getNome());
-            bw.append(" ");
-            bw.write(getEmail());
-            bw.append(" ");
-            bw.write(Integer.toString(getIdade()));
-            bw.append(" ");
-            bw.write(Double.toString(getAltura()));
-        } catch (IOException e) {
-            e.printStackTrace();
+    public void listarUsuario(){
+        for (Usuario u : listaUsuarios){
+            System.out.println(u.getNome());
         }
     }
 
+    public void adicionarUsuario(Usuario usuario){
+        listaUsuarios.add(usuario);
+    }
+
+    public void removerUsuario(Usuario usuario){
+        listaUsuarios.remove(usuario);
+    }
+
+    public void escreverEmArquivo() {
+        // A variável 'indice' deve ser inicializada corretamente
+        int indice = 1;
+
+        // Percorrendo a lista de usuários e criando um arquivo para cada um
+        for (Usuario u : listaUsuarios) {
+            // Criando o nome do arquivo com base no 'indice' e no nome do usuário
+            try (BufferedWriter bw = new BufferedWriter(
+                    new FileWriter("C:\\Users\\guilh\\IdeaProjects\\"
+                            + indice
+                            + "-"
+                            + u.getNome().trim().toUpperCase().replace(" ", "")
+                            + ".txt", true))) {
+                // Escrevendo as informações no arquivo
+                bw.write(u.getNome());
+                bw.append(" ");
+                bw.write(u.getEmail());
+                bw.append(" ");
+                bw.write(Integer.toString(u.getIdade()));
+                bw.append(" ");
+                bw.write(Double.toString(u.getAltura()));
+
+                // Incrementando o índice para o próximo usuário
+                indice++;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
     @Override
     public String toString() {
-        StringBuilder br = new StringBuilder();
-        br.append("Nome: ").append(getNome()).append("\n");
-        br.append("Email: ").append(getEmail()).append("\n");
-        br.append("Idade: ").append(getIdade()).append("\n");
-        br.append("Altura: ").append(getAltura()).append("\n");
-        return br.toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append("Nome: ").append(getNome()).append("\n");
+        sb.append("Email: ").append(getEmail()).append("\n");
+        sb.append("Idade: ").append(getIdade()).append("\n");
+        sb.append("Altura: ").append(getAltura()).append("\n");
+        return sb.toString();
     }
 }

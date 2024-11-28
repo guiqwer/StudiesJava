@@ -1,5 +1,6 @@
 package application;
 
+import UseInterface.Menu;
 import entities.Usuario;
 
 import java.io.*;
@@ -84,23 +85,20 @@ public class Program {
             //Printando a pergunta na tela
             System.out.print(perguntaAltura);
             //Entrada usuário
-            sc.nextLine();
+            sc.nextLine(); //limpando o buffer
             double alturaUsuario = sc.nextDouble();
 
             //instanciando meu objeto usuário
             Usuario usuario = new Usuario(nomeUsuario, emailUsuario, idadeUsuario, alturaUsuario);
 
-            //instanciando uma lista de usuarios
-            List<Usuario> listaUsuarios = new ArrayList<>();
+            //adicionando usuario na lista
+            usuario.adicionarUsuario(usuario);
 
-            //adicionando na lista o usuario
-            listaUsuarios.add(usuario);
             //printando os dados do meu usuário
             System.out.print(usuario);
 
-            for (int i = 1; i <= listaUsuarios.size(); i++) {
-                usuario.escreverEmArquivo(i);
-            }
+            //escrevendo usuario no arquivo
+            usuario.escreverEmArquivo();
 
         }
         //usar o catch pra pegar um possível erro de leitura
