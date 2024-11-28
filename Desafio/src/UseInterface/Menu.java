@@ -27,6 +27,7 @@ public class Menu {
             switch(opcao){
                 case 1: System.out.print("teste");
                 case 2: usuario.listarUsuario();
+                case 3:
             }
 
         }

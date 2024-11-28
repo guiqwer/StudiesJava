@@ -1,10 +1,9 @@
 package entities;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Usuario {
     private String nome;
@@ -70,6 +69,56 @@ public class Usuario {
 
     public void removerUsuario(Usuario usuario){
         listaUsuarios.remove(usuario);
+    }
+
+    public static Usuario preencherFormulario() {
+        Scanner sc = new Scanner(System.in);
+        String path = "C:\\Users\\guilh\\IdeaProjects\\formulario.txt";
+
+        // Declarar um try-with-resources para ler as perguntas do arquivo
+        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+            String line = br.readLine();
+
+            // Usando o StringBuilder para fazer uma string mutável
+            StringBuilder perguntas = new StringBuilder();
+
+            // While para pegar as perguntas do formulário
+            while (line != null) {
+                perguntas.append(line).append(" ");
+                line = br.readLine();
+            }
+
+            // Dividir o formulário em perguntas
+            String[] formulario = perguntas.toString().split(" ");
+
+            // Passando a pergunta do nome para uma String
+            String perguntaNomeCompleto = formulario[0] + " " + formulario[1] + " " + formulario[2] + " " + formulario[3];
+            System.out.print(perguntaNomeCompleto);
+            String nomeUsuario = sc.nextLine();
+
+            // Passando a pergunta do email para uma String
+            String perguntaEmail = formulario[4] + " " + formulario[5] + " " + formulario[6] + " " + formulario[7] + " " + formulario[8];
+            System.out.print(perguntaEmail);
+            String emailUsuario = sc.nextLine();
+
+            // Passando a pergunta da idade para uma String
+            String perguntaIdade = formulario[9] + " " + formulario[10] + " " + formulario[11];
+            System.out.print(perguntaIdade);
+            int idadeUsuario = sc.nextInt();
+
+            // Passando a pergunta da altura para uma String
+            String perguntaAltura = formulario[12] + " " + formulario[13] + " " + formulario[14];
+            System.out.print(perguntaAltura);
+            sc.nextLine(); // limpando o buffer
+            double alturaUsuario = sc.nextDouble();
+
+            // Criar e retornar um objeto Usuario com os dados preenchidos
+            return new Usuario(nomeUsuario, emailUsuario, idadeUsuario, alturaUsuario);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public void escreverEmArquivo() {
