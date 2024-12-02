@@ -1,9 +1,7 @@
 package entities;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Usuario {
     private String nome;
@@ -79,41 +77,29 @@ public class Usuario {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line = br.readLine();
 
-            // Usando o StringBuilder para fazer uma string mutável
-            StringBuilder perguntas = new StringBuilder();
+            List<String> perguntas = new ArrayList<>();
 
             // While para pegar as perguntas do formulário
             while (line != null) {
-                perguntas.append(line).append(" ");
+                perguntas.add(line);
                 line = br.readLine();
             }
 
-            // Dividir o formulário em perguntas
-            String[] formulario = perguntas.toString().split(" ");
+            //map para associar cada pergunta com uma resposta
+            Map<String, String> respostas = new LinkedHashMap<>();
 
-            // Passando a pergunta do nome para uma String
-            String perguntaNomeCompleto = formulario[0] + " " + formulario[1] + " " + formulario[2] + " " + formulario[3];
-            System.out.print(perguntaNomeCompleto);
-            String nomeUsuario = sc.nextLine();
+            for (String pergunta : perguntas) {
+                System.out.println(pergunta + " ");
+                String resposta = sc.nextLine();
+                respostas.put(pergunta, resposta);
+            }
 
-            // Passando a pergunta do email para uma String
-            String perguntaEmail = formulario[4] + " " + formulario[5] + " " + formulario[6] + " " + formulario[7] + " " + formulario[8];
-            System.out.print(perguntaEmail);
-            String emailUsuario = sc.nextLine();
+            String nome = respostas.get(perguntas.get(0));  // Resposta para o nome
+            String email = respostas.get(perguntas.get(1));  // Resposta para o email
+            int idade = Integer.parseInt(respostas.get(perguntas.get(2)));  // Resposta para a idade
+            double altura = Double.parseDouble(respostas.get(perguntas.get(3)));  // Resposta para a altura
 
-            // Passando a pergunta da idade para uma String
-            String perguntaIdade = formulario[9] + " " + formulario[10] + " " + formulario[11];
-            System.out.print(perguntaIdade);
-            int idadeUsuario = sc.nextInt();
-
-            // Passando a pergunta da altura para uma String
-            String perguntaAltura = formulario[12] + " " + formulario[13] + " " + formulario[14];
-            System.out.print(perguntaAltura);
-            sc.nextLine(); // limpando o buffer
-            double alturaUsuario = sc.nextDouble();
-
-            // Criar e retornar um objeto Usuario com os dados preenchidos
-            return new Usuario(nomeUsuario, emailUsuario, idadeUsuario, alturaUsuario);
+            return new Usuario(nome, email, idade, altura);
 
         } catch (IOException e) {
             e.printStackTrace();
