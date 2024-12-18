@@ -2,6 +2,9 @@ package application;
 
 
 import entities.Usuario;
+import service.ControleUsuario;
+import service.Formulario;
+
 import java.util.Locale;
 
 
@@ -10,17 +13,19 @@ public class Program {
         //Mudar meu locale para US
         Locale.setDefault(Locale.US);
 
+
         //Instanciando um objeto usuario com os elementos
-        Usuario usuario = Usuario.preencherFormulario();
+        Usuario usuario = Formulario.cadastrarUsuario();
 
         //adicionando usuario na lista
-        usuario.adicionarUsuario(usuario);
+        ControleUsuario controleUsuario = new ControleUsuario();
+        controleUsuario.adicionarUsuario(usuario);
 
         //printando os dados do meu usuário
         System.out.print(usuario);
 
         //escrevendo usuario no arquivo
-        usuario.escreverEmArquivo();
+        controleUsuario.SalvarUsuariosEmArquivo();
 
     }
 
